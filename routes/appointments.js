@@ -25,21 +25,17 @@ router.post(
   }
 );
 
-router.post(
-  "/get-appointments-service",
-  passport.authenticate("jwt", { session: false }),
-  function (req, res) {
-    const { serviceID } = req.body;
-    Appointment.find({ serviceID }, function (err, appointments) {
-      if (err) {
-        res.json({
-          error: "sorry there was an error while processing your request",
-        });
-      } else {
-        res.send(appointments);
-      }
-    });
-  }
-);
+router.post("/get-appointments-service", function (req, res) {
+  const { serviceID } = req.body;
+  Appointment.find({ serviceID }, function (err, appointments) {
+    if (err) {
+      res.json({
+        error: "sorry there was an error while processing your request",
+      });
+    } else {
+      res.send(appointments);
+    }
+  });
+});
 
 module.exports = router;
