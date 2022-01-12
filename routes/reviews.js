@@ -27,21 +27,17 @@ router.post(
   }
 );
 
-router.post(
-  "/get-reviews-by-service",
-  passport.authenticate("jwt", { session: false }),
-  function (req, res) {
-    const { serviceID } = req.body;
-    Review.find({ serviceID: serviceID }, function (err, reviews) {
-      if (err) {
-        res.json({
-          error: "sorry there was an error while processing your request",
-        });
-      } else {
-        res.send(reviews);
-      }
-    });
-  }
-);
+router.post("/get-reviews-by-service", function (req, res) {
+  const { serviceID } = req.body;
+  Review.find({ serviceID: serviceID }, function (err, reviews) {
+    if (err) {
+      res.json({
+        error: "sorry there was an error while processing your request",
+      });
+    } else {
+      res.send(reviews);
+    }
+  });
+});
 
 module.exports = router;
