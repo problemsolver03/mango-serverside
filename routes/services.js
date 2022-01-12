@@ -47,8 +47,9 @@ router.post(
   "/services-by-user",
   passport.authenticate("jwt", { session: false }),
   function (req, res) {
-    let { _id } = req.user._doc;
-    Service.find({ user: _id }, function (err, services) {
+    let { user } = req.body;
+
+    Service.find({ user }, function (err, services) {
       if (err) {
         res.json({
           error: "sorry there was an error while processing your request",
