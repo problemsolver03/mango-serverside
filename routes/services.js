@@ -106,4 +106,16 @@ router.post("/get-service", function (req, res) {
   });
 });
 
+router.get("/get-services", function (req, res) {
+  Service.find({}, function (err, services) {
+    if (err) {
+      res.json({
+        error: "sorry there was an error while processing your request",
+      });
+    } else {
+      res.send(services);
+    }
+  });
+});
+
 module.exports = router;
